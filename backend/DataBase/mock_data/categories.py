@@ -1,5 +1,5 @@
 from typing import List
 from models.Category import *
 from constants.constans import *
-transactions: List[Category] = [
-    Category(1, TRANSPORT, BUS), Category(2, FOOD, CAT_FOOD)]
+categories: List[Category] = [
+    Category(id=1, category=TRANSPORT, vendor=BUS), Category(id=2, category=FOOD, vendor=CAT_FOOD)]

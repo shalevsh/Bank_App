@@ -1,4 +1,4 @@
 from typing import List
 from models.Transaction import *
 transactions: List[Transaction] = [
-    Transaction(1, 10, False), Transaction(2, 100, True)]
+    Transaction(id=1, amount=10, is_depoist=False), Transaction(id=2, amount=100, is_depoist=True)]

@@ -13,10 +13,10 @@ CREATE TABLE IF NOT EXISTS category(
 );
 
 CREATE TABLE IF NOT EXISTS transaction_category(
-    id_transaction INT NOT NULL ,
-    id_category INT NOT NULL ,
-    PRIMARY KEY (id_transaction,id_category),
-    FOREIGN KEY (id_transaction) REFERENCES bank_transaction(id),
-    FOREIGN KEY (id_category) REFERENCES category(id)
+    transaction_id INT NOT NULL ,
+    category_id INT NOT NULL ,
+    PRIMARY KEY (transaction_id,category_id),
+    FOREIGN KEY (transaction_id) REFERENCES bank_transaction(id),
+    FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
