@@ -33,8 +33,4 @@ USE bank_app;
 -- JOIN Category
 -- ON Category.id = Transaction_Category.category_id;
 
-SELECT BT.id, BT.amount, BT.is_depoist, C.category, C.vendor  FROM Bank_Transaction as BT 
-JOIN Transaction_Category as TC 
-ON BT.id = TC.transaction_id 
-JOIN Category as C 
-ON C.id = TC.category_id;
+DELETE FROM Bank_Transaction WHERE id= 1;

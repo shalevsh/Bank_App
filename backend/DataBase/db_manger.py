@@ -48,8 +48,8 @@ def delete_transaction(transaction_id: int) -> None:
     delete_transaction_category_query: str = DELETE_TRANSACTION_CATEGORY_FROM_TABLE.format(
         transaction_id=transaction_id)
     with connection.cursor() as cursor:
-        cursor.execute(delete_transaction_query)
         cursor.execute(delete_transaction_category_query)
+        cursor.execute(delete_transaction_query)
         connection.commit()
 
 
@@ -68,4 +68,4 @@ def get_all_categories_with_sum_of_amount():
 
 if __name__ == "__main__":
     # add_transaction(transactions[1], categories[1])
-    delete_transaction(0)
+    delete_transaction(1)
