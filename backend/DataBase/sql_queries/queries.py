@@ -1,3 +1,6 @@
-INSERT_INTO_DAIRY = """INSERT INTO dairy(ingredient_name) VALUES(%s)"""
-
-INSERT_INTO_GLUTEN = """INSERT INTO gluten(ingredient_name) VALUES(%s)"""
+GET_TRANSACTIONS = "SELECT BT.id, BT.amount, BT.is_depoist, C.category, C.vendor  FROM Bank_Transaction as BT JOIN Transaction_Category as TC ON BT.id = TC.transaction_id JOIN Category as C ON C.id = TC.category_id;"
+ADD_TRANSACTION_TO_TABLE = """INSERT INTO Bank_Transaction (amount,is_depoist) VALUES ({amount},{is_depoist});"""
+ADD_CATAGORY_TO_TABLE = """INSERT INTO Category (vendor, category) VALUES ('{vendor}', '{category}');"""
+ADD_TRANSACTION_CATAGORY_TO_TABLE = """INSERT INTO Transaction_Category (transaction_id, category_id) VALUES(%s, %s);"""
+DELETE_TRANSACTION_FROM_TABLE = """DELETE FROM Bank_Transaction as BT WHERE BT.id= '{transaction_id}';"""
+DELETE_TRANSACTION_CATEGORY_FROM_TABLE = """DELETE FROM Transaction_Category as TC WHERE TC.transaction_id ='{transaction_id}' """

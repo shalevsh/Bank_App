@@ -15,25 +15,23 @@ connection = pymysql.connect(
 )
 
 if connection.open:
-    print("the connection is opened")
+    print(CHECK_CONNECTION)
 
 
-def get_all_transactions():
-    query: str = """   SELECT Bank_Transaction.id, Bank_Transaction.amount, Category.id, Category.vendor, Category.category
-                         FROM Bank_Transaction JOIN Transaction_Category
-                         ON Bank_Transaction.id = Transaction_Category.transaction_id
-                         JOIN Category
-                         ON Category.id = Transaction_Category.category_id;"""
+def get_all_transactions() -> List[dict]:
+    query: str = GET_TRANSACTIONS
     with connection.cursor() as cursor:
         cursor.execute(query)
-        result = cursor.fetchall
+        result = cursor.fetchall()
         return result
 
 
-def add_transaction(transaction: Transaction, category: Category):
-    add_bank_transaction_query: str = f"INSERT INTO Bank_Transaction (amount,is_depoist) VALUES ({transaction.amount},{transaction.is_depoist});"
-    add_category_query: str = f"INSERT INTO Category (vendor, category) VALUES ('{category.vendor}', '{category.category}');"
-    add_transaction_category_query: str = """INSERT INTO Transaction_Category (transaction_id, category_id) VALUES(%s, %s);"""
+def add_transaction(transaction: Transaction, category: Category) -> None:
+    add_bank_transaction_query: str = ADD_TRANSACTION_TO_TABLE.format(
+        amount=transaction.amount, is_depoist=transaction.is_depoist)
+    add_category_query: str = ADD_CATAGORY_TO_TABLE.format(
+        vendor=category.vendor, category=category.category)
+    add_transaction_category_query: str = ADD_TRANSACTION_CATAGORY_TO_TABLE
     with connection.cursor() as cursor:
         cursor.execute(add_bank_transaction_query)
         transaction_id: int = cursor.lastrowid
@@ -44,14 +42,13 @@ def add_transaction(transaction: Transaction, category: Category):
         connection.commit()
 
 
-def delete_transaction(transaction_id: int, category_id: int):
-    delete_by_id_query: str = """DELETE FROM %s WHERE id=%d;"""
-    delete_transaction_category_query: str = """DELETE FROM TransactionCategory 
-                                                WHERE transaction_id={transaction_id} AND category_id={category_id};"""
+def delete_transaction(transaction_id: int) -> None:
+    delete_transaction_query: str = DELETE_TRANSACTION_FROM_TABLE.format(
+        transaction_id=transaction_id)
+    delete_transaction_category_query: str = DELETE_TRANSACTION_CATEGORY_FROM_TABLE.format(
+        transaction_id=transaction_id)
     with connection.cursor() as cursor:
-        cursor.execute(delete_by_id_query, [
-                       "Bank_Transaction", transaction_id])
-        cursor.execute(delete_by_id_query, ["Category", category_id])
+        cursor.execute(delete_transaction_query)
         cursor.execute(delete_transaction_category_query)
         connection.commit()
 
@@ -70,5 +67,5 @@ def get_all_categories_with_sum_of_amount():
 
 
 if __name__ == "__main__":
-    add_transaction(transactions[0], categories[0])
-    pass
+    # add_transaction(transactions[1], categories[1])
+    delete_transaction(0)
