@@ -5,7 +5,7 @@ USE bank_app;
 -- CREATE TABLE IF NOT EXISTS bank_transaction(
 --     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 --     amount INT UNSIGNED NOT NULL,
---     is_depoist BOOLEAN NOT NULL
+--     is_deposit BOOLEAN NOT NULL
 -- );
 
 -- CREATE TABLE IF NOT EXISTS category( 
@@ -14,23 +14,25 @@ USE bank_app;
 --     vendor VARCHAR(50) NOT NULL
 -- );
 
--- CREATE TABLE IF NOT EXISTS transaction_category(
---     transaction_id INT UNSIGNED NOT NULL ,
---     category_id INT UNSIGNED  NOT NULL ,
---     PRIMARY KEY (transaction_id,category_id),
---     FOREIGN KEY (transaction_id) REFERENCES bank_transaction(id),
---     FOREIGN KEY (category_id) REFERENCES category(id)
--- );
+CREATE TABLE IF NOT EXISTS transaction_category(
+    transaction_id INT UNSIGNED NOT NULL ,
+    category_id INT UNSIGNED  NOT NULL ,
+    PRIMARY KEY (transaction_id,category_id),
+    FOREIGN KEY (transaction_id) REFERENCES bank_transaction(id),
+    FOREIGN KEY (category_id) REFERENCES category(id)
+);
 
--- -- drop table transaction_category;
+-- drop table transaction_category;
 
--- -- drop table bank_transaction;
--- -- drop table category;
+-- drop table bank_transaction;
+-- drop table category;
 
--- SELECT Bank_Transaction.id, Bank_Transaction.amount, Category.id, Category.vendor, Category.category
--- FROM Bank_Transaction JOIN Transaction_Category 
--- ON Bank_Transaction.id = Transaction_Category.transaction_id 
--- JOIN Category
--- ON Category.id = Transaction_Category.category_id;
+SELECT Category.category,Bank_Transaction.is_deposit, SUM(Bank_Transaction.amount)
+FROM Bank_Transaction 
+JOIN Transaction_Category 
+ON Bank_Transaction.id = Transaction_Category.transaction_id 
+JOIN Category 
+ON Category.id = Transaction_Category.category_id 
+WHERE Bank_Transaction.is_deposit = '1' ;
+GROUP BY Category.category;
 
-DELETE FROM Bank_Transaction WHERE id= 1;

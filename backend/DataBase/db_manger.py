@@ -3,7 +3,7 @@ from typing import List
 from sql_queries.queries import *
 from mock_data.transactions import *
 from mock_data.categories import *
-
+from constants.constans import *
 
 connection = pymysql.connect(
     host="localhost",
@@ -28,7 +28,7 @@ def get_all_transactions() -> List[dict]:
 
 def add_transaction(transaction: Transaction, category: Category) -> None:
     add_bank_transaction_query: str = ADD_TRANSACTION_TO_TABLE.format(
-        amount=transaction.amount, is_depoist=transaction.is_depoist)
+        amount=transaction.amount, is_deposit=transaction.is_deposit)
     add_category_query: str = ADD_CATAGORY_TO_TABLE.format(
         vendor=category.vendor, category=category.category)
     add_transaction_category_query: str = ADD_TRANSACTION_CATAGORY_TO_TABLE
@@ -53,19 +53,44 @@ def delete_transaction(transaction_id: int) -> None:
         connection.commit()
 
 
-def get_all_categories_with_sum_of_amount():
-    categories_with_sum_of_amount_quary: str = """ SELECT Category.category, SUM(Bank_Transaction.amount),
-                                                    FROM Bank_Transaction JOIN TransactionCategory
-                                                    ON Bank_Transaction.id = TransactionCategory.transaction_id
-                                                    JOIN Category
-                                                    ON Category.id = TransactionCategory.category_id
-                                                    GROUP BY Category.category"""
+def get_all_categories_with_sum_of_amount() -> List[dict]:
+    categories_deposite_sum_query: str = GET_CATEGORIES_WITH_SUM.format(
+        is_deposit = TRUE)
+    categories_withdraw_sum_query: str = GET_CATEGORIES_WITH_SUM.format(
+        is_deposit= FALSE)
     with connection.cursor() as cursor:
-        cursor.execute(categories_with_sum_of_amount_quary)
-        result = cursor.fetchall()
-        return result
+        cursor.execute(categories_deposite_sum_query)
+        deposite_categories: List[dict] = cursor.fetchall()
+        cursor.execute(categories_withdraw_sum_query)
+        withdraw_categories = cursor.fetchall()
+        categories_with_sum: List[dict] = calculate_balance(
+            deposite_categories, withdraw_categories)
+        return categories_with_sum
+
+
+def calculate_balance(deposite_categories: List[dict], withdraw_categories: List[dict]) -> List[dict]:
+    for income_category in deposite_categories:
+        index, withdraw_amount = [(index, category['sum'])
+                                  for index, category
+                                  in withdraw_categories
+                                  if category['category'] == income_category["category"]]
+        income_category["sum"] -= withdraw_amount
+        withdraw_categories.remove(index)
+        add_categories_without_deposit(
+            deposite_categories, withdraw_categories)
+    return deposite_categories
+
+
+def add_categories_without_deposit(deposite_categories: List[dict], withdraw_categories: List[dict]) -> None:
+    for category in withdraw_categories:
+        category.sum = - category.sum
+        deposite_categories.push(category)
 
 
 if __name__ == "__main__":
+    # methods for check db functinality :
+
+    # add_transaction(transactions[0], categories[0])
     # add_transaction(transactions[1], categories[1])
-    delete_transaction(1)
+    # delete_transaction(1)
+    get_all_categories_with_sum_of_amount()
