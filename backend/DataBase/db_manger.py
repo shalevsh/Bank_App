@@ -95,4 +95,4 @@ if __name__ == "__main__":
     # add_transaction(transactions[0], categories[0])
     # add_transaction(transactions[1], categories[1])
     # delete_transaction(1)
-    get_all_categories_with_sum_of_amount()
+    # get_all_categories_with_sum_of_amount()
