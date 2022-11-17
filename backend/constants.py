@@ -1,0 +1,5 @@
+RECIPES_URL = "https://recipes-goodness.herokuapp.com/recipes/%s"
+DIARY = "DIARY"
+GLUTEN = "GLUTEN"
+SELECT_FROM_DAIRY = "SELECT * FROM dairy"
+SELECT_FROM_GLUTEN = "SELECT * FROM gluten "
