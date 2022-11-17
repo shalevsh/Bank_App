@@ -70,16 +70,13 @@ def get_all_categories_with_sum_of_amount() -> List[dict]:
 
 def calculate_balance(deposite_categories: List[dict], withdraw_categories: List[dict]) -> List[dict]:
     for income_category in deposite_categories:
-        deposite_category = income_category["category"]
+        deposite_category: str = income_category["category"]
         if any(withdraw_category['category'] == deposite_category for withdraw_category in withdraw_categories):
-            index, withdraw_amount = [(index, withdraw_category['sum'])
-                                      for index, withdraw_category
-                                      in withdraw_categories
-                                      if withdraw_category['category'] == deposite_category]
-        income_category["sum"] -= withdraw_amount
-        withdraw_categories.remove(index)
-        add_categories_without_deposit(
-            deposite_categories, withdraw_categories)
+            index, withdraw_amount = extract_withdraw_values(
+                deposite_category, withdraw_categories)
+            income_category["sum"] -= withdraw_amount
+            withdraw_categories.remove(index)
+    add_categories_without_deposit(deposite_categories, withdraw_categories)
     return deposite_categories
 
 
@@ -89,9 +86,16 @@ def add_categories_without_deposit(deposite_categories: List[dict], withdraw_cat
         deposite_categories.push(category)
 
 
-if __name__ == "__main__":
-    # methods for check db functinality :
+def extract_withdraw_values(deposite_category: str, withdraw_categories: List[dict]) -> tuple:
+    return [(index, withdraw_category['sum'])
+            for index, withdraw_category
+            in withdraw_categories
+            if withdraw_category['category'] == deposite_category]
 
+
+if __name__ == "__main__":
+    pass
+    # methods for check db functinality :
     # add_transaction(transactions[0], categories[0])
     # add_transaction(transactions[1], categories[1])
     # delete_transaction(1)
