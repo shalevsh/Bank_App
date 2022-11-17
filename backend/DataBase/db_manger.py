@@ -55,9 +55,9 @@ def delete_transaction(transaction_id: int) -> None:
 
 def get_all_categories_with_sum_of_amount() -> List[dict]:
     categories_deposite_sum_query: str = GET_CATEGORIES_WITH_SUM.format(
-        is_deposit = TRUE)
+        is_deposit=TRUE)
     categories_withdraw_sum_query: str = GET_CATEGORIES_WITH_SUM.format(
-        is_deposit= FALSE)
+        is_deposit=FALSE)
     with connection.cursor() as cursor:
         cursor.execute(categories_deposite_sum_query)
         deposite_categories: List[dict] = cursor.fetchall()
@@ -70,10 +70,12 @@ def get_all_categories_with_sum_of_amount() -> List[dict]:
 
 def calculate_balance(deposite_categories: List[dict], withdraw_categories: List[dict]) -> List[dict]:
     for income_category in deposite_categories:
-        index, withdraw_amount = [(index, category['sum'])
-                                  for index, category
-                                  in withdraw_categories
-                                  if category['category'] == income_category["category"]]
+        deposite_category = income_category["category"]
+        if any(withdraw_category['category'] == deposite_category for withdraw_category in withdraw_categories):
+            index, withdraw_amount = [(index, withdraw_category['sum'])
+                                      for index, withdraw_category
+                                      in withdraw_categories
+                                      if withdraw_category['category'] == deposite_category]
         income_category["sum"] -= withdraw_amount
         withdraw_categories.remove(index)
         add_categories_without_deposit(
