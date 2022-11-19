@@ -1,9 +1,9 @@
 import pymysql
 from typing import List
-from sql_queries.queries import *
-from mock_data.transactions import *
-from mock_data.categories import *
-from constants.constans import *
+from database.sql_queries.queries import *
+from database.mock_data.transactions import *
+from database.mock_data.categories import *
+from database.constants.constant import *
 
 connection = pymysql.connect(
     host="localhost",
