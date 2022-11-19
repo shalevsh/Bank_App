@@ -1,9 +1,9 @@
 import pymysql
 from typing import List
-from sql_queries.queries import *
-from mock_data.transactions import *
-from mock_data.categories import *
-from constants.constans import *
+from database.sql_queries.queries import *
+from database.mock_data.transactions import *
+from database.mock_data.categories import *
+from database.constants.constant import *
 
 connection = pymysql.connect(
     host="localhost",
@@ -96,6 +96,7 @@ def extract_withdraw_values(deposite_category: str, withdraw_categories: List[di
 if __name__ == "__main__":
     pass
     # methods for check db functinality :
+
     # add_transaction(transactions[0], categories[0])
     # add_transaction(transactions[1], categories[1])
     # delete_transaction(1)

@@ -1,5 +1,5 @@
 from typing import List
-from models.Category import *
-from constants.constans import *
+from database.mock_data import Category
+from database.mock_data import constant
 categories: List[Category] = [
-    Category(id=1, category=TRANSPORT, vendor=BUS), Category(id=2, category=FOOD, vendor=CAT_FOOD)]
+    Category(id=1, category=constant.TRANSPORT, vendor=constant.BUS), Category(id=2, category=constant.FOOD, vendor=constant.CAT_FOOD)]
