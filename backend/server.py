@@ -1,9 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from server_utils.routers import category_routs, transaction_routs
 
 
 app = FastAPI()
+
+app.include_router(transaction_routs.transaction_router)
+app.include_router(category_routs.category_router)
+
+
 origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
@@ -19,7 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(transactions_api.router)
 
 @app.get("/")
 def root():
