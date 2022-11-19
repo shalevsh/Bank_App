@@ -96,6 +96,7 @@ def extract_withdraw_values(deposite_category: str, withdraw_categories: List[di
 if __name__ == "__main__":
     pass
     # methods for check db functinality :
+
     # add_transaction(transactions[0], categories[0])
     # add_transaction(transactions[1], categories[1])
     # delete_transaction(1)
