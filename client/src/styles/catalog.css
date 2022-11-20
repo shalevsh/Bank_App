@@ -1,0 +1,9 @@
+#catalog{
+    text-align: center;
+    font-size: 40px;
+    margin-top:30vh;
+}
+.catalog-body{
+    display: flex;
+    gap: 100px;
+}

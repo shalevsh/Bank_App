@@ -1,0 +1,41 @@
+
+.item-body{
+    position: relative;
+    width: 50%;
+    margin: 5px;
+}
+.rent-button{
+    position: absolute;
+    top: 12%;
+    left: 150%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.rent-button:hover{
+background-color: aqua;
+}
+
+.item-container{
+    margin-top: 100px;
+
+}
+@keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-20px);
+    }
+  }
+  .item-container:hover {
+    animation-name: bounce;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
