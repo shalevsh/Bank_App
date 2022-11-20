@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from "react";
 import axios from "axios"
-import TransactionItem from "../transactionItem";
+import Item from "../item/Item";
 import "transactions.css"
 import Transaction from "../../models/Transaction";
 import Category from "../../models/Category";
@@ -29,8 +29,8 @@ function Transactions() {
         fetchData()
     },[])
 
-    return <div className="transactions">{data.map(obj=><TransactionItem
-     key={obj.transaction.id} transactionItem={obj} fetchData={fetchData} />)}</div>;
+    return <div className="transactions">{data.map(obj=><Item
+     key={obj.transaction.id} item={obj} fetchData={fetchData} />)}</div>;
 
 
 }
