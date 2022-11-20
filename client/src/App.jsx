@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Transactions from "./components/transactions/";
 import Operations from "./components/operations";
-import NavBar from "./components/navBar";
+import NavBar from "./components/navbar/Navbar.jsx";
 import Breakdown from "./components/breakdown";
 import * as constants from "./constants/consts.js";
 
