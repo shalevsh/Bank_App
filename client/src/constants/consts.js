@@ -1,5 +1,8 @@
-export const NO_USER_SELECT_MSG = "pls choose user";
-export const CATALOG = "catalog";
-export const HOME = "Home";
-export const RENTAL_MOVIES = "Rental movies : "
-export const CATALOG_MOVIES = "Catalog movies : "
+export const TRANSACTIONS = "transactions : ";
+export const HOME_PATH = "/";
+export const OPERATIONS_PATH = `${HOME_PATH}operations`;
+export const LINK = `link`;
+export const NAVBAR = `navbar-container`;
+export const BREAKDOWN = `Breakdown`;
+export const OPERATIONS = `Operations`;
+export const BREAKDOWN_PATH = `${HOME_PATH}breakdown`;
