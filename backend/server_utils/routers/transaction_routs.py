@@ -16,7 +16,7 @@ def get_transactions() -> List[dict]:
         transactions = db_manger.get_all_transactions()
     except pymysql.MySQLError as error:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=error)
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail = error)
     return transactions
 
 
