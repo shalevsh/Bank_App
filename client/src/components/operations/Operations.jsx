@@ -28,7 +28,7 @@ function Operations(props) {
         }
 
         const clickHandler=(event)=>{
-                const is_deposite = event.target.name===constants.WITHDRAW ? false: true
+                const is_deposite = !(event.target.name===constants.WITHDRAW)
                 if(inputValues.amount && inputValues.vendor && inputValues.category){
                         axios.post(constants.TRANSACTIONS_URL,{
                                 user_id,amount,category,vendor,is_deposite

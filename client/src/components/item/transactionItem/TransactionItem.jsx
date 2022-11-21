@@ -4,6 +4,7 @@ import * as constants from "../../../constants/consts.js";
 
 
 function TransactionItem(props) {
+    //what if the transaction is undefined ?
     const transactionClassName = props.transaction.is_deposite ? "positive-text" : "negative-text"
     const transactionAmount =`${props.transaction.amount}${constants.COIN_CURRENCY}`
     return(
