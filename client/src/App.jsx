@@ -23,15 +23,8 @@ function App() {
                     )}
                 />
                 <Route
-                    path={constants.OPERATIONS_PATH}
-                    exact
-                    render={() => (
-                        <Operations
-                            movies={state.movies}
-                            toggleRentStatus={this.updateRentStatus}
-                            updateBudget={this.updateBudget}
-                        />
-                    )}
+                    exact path={constants.OPERATIONS_PATH}
+                    component={<Operations/>}
                 />
 
                 <Route

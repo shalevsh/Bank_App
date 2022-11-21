@@ -5,10 +5,9 @@ import "operations.css"
 import * as constants from "../../constants/consts.js";
 
 
-function Operations(props) {
+function Operations() {
         const [categories,setCategories] = useState([])
         const [inputValues,setInputValues] = useState({amount:undefined,vendor:undefined,category:undefined})
-        const user_id = props.user.user_id;
         const amount = inputValues.amount;
         const category= inputValues.category;
         const vendor = inputValues.vendor;
@@ -35,7 +34,6 @@ function Operations(props) {
                         }).then(()=>
                         {
                         setInputValues({amount : undefined, vendor : undefined, category : undefined})
-                        props.fetchUser();
                 })       
                 }
         }
