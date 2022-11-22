@@ -1,5 +1,5 @@
 import React from "react";
-import "transactionItem.css"
+// import "transactionItem.css"
 import * as constants from "../../../constants/consts.js";
 
 

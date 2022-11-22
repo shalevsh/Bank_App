@@ -1,8 +1,8 @@
 
 import React,{ useState,useEffect } from "react";
-import axios from "axios"
-import Category from "../category"
-import "/Breakdown.css"
+import axios from 'axios';
+import Category from "../catergory/Category.jsx"
+// import "/Breakdown.css"
 import * as constants from "../../constants/consts.js"
 
 

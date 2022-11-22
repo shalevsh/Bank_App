@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import axios from "axios"
-import "operations.css"
+// import "operations.css"
 import * as constants from "../../constants/consts.js";
 
 
@@ -30,7 +30,7 @@ function Operations() {
                 const is_deposite = !(event.target.name===constants.WITHDRAW)
                 if(inputValues.amount && inputValues.vendor && inputValues.category){
                         axios.post(constants.TRANSACTIONS_URL,{
-                                user_id,amount,category,vendor,is_deposite
+                                amount,category,vendor,is_deposite
                         }).then(()=>
                         {
                         setInputValues({amount : undefined, vendor : undefined, category : undefined})
