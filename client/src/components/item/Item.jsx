@@ -1,5 +1,5 @@
 import React from "react";
-import "item.css"
+// import "item.css"
 import axios from "axios"
 import * as constants from "../../constants/consts.js";
 import TransactionItem from "./transactionItem/TransactionItem.jsx";

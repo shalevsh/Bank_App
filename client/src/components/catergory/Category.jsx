@@ -1,13 +1,20 @@
 import React from "react";
-import "category.css"
+// import "category.css"
 import * as constants from "../../constants/consts.js"
 
 function Category(props) {
+    const categoryProp = props.category
     return( 
         <div className="category-card">
             <div className="category-text-card">
-                <h4 >{props.category.category}</h4>
-                <h4 >{props.category.amount}{constants.COIN_CURRENCY}</h4>
+                {categoryProp ? 
+                <div className="category-content">
+                <h4 >{categoryProp.category}</h4>
+                <h4 >{categoryProp.amount}{constants.COIN_CURRENCY}</h4>
+                </div>:
+                <h1 >{constants.NO_CATEGORY}</h1>
+                }
+               
             </div>
         </div>
         );

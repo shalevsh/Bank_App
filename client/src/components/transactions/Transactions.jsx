@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from "react";
 import axios from "axios"
 import Item from "../item/Item";
-import "transactions.css"
+// import "transactions.css"
 import Transaction from "../../models/Transaction";
 import Category from "../../models/Category";
 import * as constants from "../../constants/consts.js";
